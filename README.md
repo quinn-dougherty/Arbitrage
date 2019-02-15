@@ -9,8 +9,6 @@ NOTES:
 
 Double Round Robin: length 2 permutations of competitors represents the set of games. 
 
-
-
 - ~~competition will be `P(n,2)` games long, if we have n players competing.~~ 
 ### this is implemented, but i need to check with Rudy to make sure i interpreted double-round-robin correctly
 
@@ -22,7 +20,7 @@ Double Round Robin: length 2 permutations of competitors represents the set of g
 
 ## competitors will have to be 100% signed up in advance. I don't think we can admit new competitors once the tournament begins? 
 
-## We should be able to let bettors sign up on a rolling basis. they get initialized with $\lambda$100
+## We should be able to let bettors sign up on a rolling basis. they get initialized with λ100
 
 
 
@@ -32,9 +30,9 @@ Betters can look at the current accumulated score for each player, and submit be
 
 what they're betting _on_ is the outcome at the very end--- the final score. 
 
-each bettor gets $\lambda$100, and the house will initialize at (null hypothesis) 1:1 odds on each player. I'll represent the house as a forecaster/bettor, just giving it more starter cash (like $\lambda$1000) and generating the null hyp bets
+each bettor gets λ100, and the house will initialize at (null hypothesis) 1:1 odds on each player. I'll represent the house as a forecaster/bettor, just giving it more starter cash (like λ1000) and generating the null hyp bets
 
-- Should we have a mechanism for partial/depleted payouts if you bet on someone who got 2nd, 3rd, 5th place?? I don't know the details. I could do it as a basic discount factor but i think that might require unlimited house pot (rather than an arbitrary but fixed pot of like $\lambda$1000). 
+- Should we have a mechanism for partial/depleted payouts if you bet on someone who got 2nd, 3rd, 5th place?? I don't know the details. I could do it as a basic discount factor but i think that might require unlimited house pot (rather than an arbitrary but fixed pot of like λ1000). 
 
 
 
