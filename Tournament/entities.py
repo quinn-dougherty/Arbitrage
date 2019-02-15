@@ -8,21 +8,19 @@ class Competitor:
         self.name = name
         self.wins = 0
 
-    def show(self):
+    def show(self): 
         return self.name
 
-
 class Forecaster:
-    def __init__(self, name, balance):
+    def __init__(self, name, balance=100):
         assert isinstance(name, str)
         self.name = name
-        self.balance = 100
+        self.balance = balance
         self.bets_offered = None
         self.bets_taken = None
 
     def show(self):
         return (self.name, self.balance)
-
 
 class Game:
     def __init__(self, ident, black, white, winner=None):
@@ -32,7 +30,6 @@ class Game:
         self.black = black
         self.white = white
         self.winner = winner
-
 
 class Bet:
     '''NOTE: You have to split this into "bets posted" and "bets taken" '''
