@@ -3,9 +3,15 @@ import typing
 
 
 class Competitor:
-    def __init__(self, name):
+    def __init__(self, name, username, program=None):
         assert isinstance(name, str)
+        if username[0]=='@': 
+            self.username=username
+        else: 
+            self.username='@'+username
+        assert program in {'DS', 'iOS', 'FSW', 'Android', None}
         self.name = name
+        self.program = program
         self.score = 0
 
     def show(self): 

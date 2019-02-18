@@ -34,5 +34,5 @@ each bettor gets λ100, and the house will initialize at (null hypothesis) 1:1 o
 
 - Should we have a mechanism for partial/depleted payouts if you bet on someone who got 2nd, 3rd, 5th place?? I don't know the details. I could do it as a basic discount factor but i think that might require unlimited house pot (rather than an arbitrary but fixed pot of like λ1000). 
 
-
+## Currently thinking actually that the Book class _wont_ inherit from the Boards class
 
