@@ -17,6 +17,8 @@ NOTES:
 ## Bettors can sign up on a rolling basis. they get initialized with λ100
 - I'm also at this point planning every `mark_winner` actually replenishes a dollar to every bettor, to help keep things interesting.  
 
+- #TODO: factor out `sklearn.utils.shuffle`, whip it up with standard library instead. 
+
 ## ALL THAT'S LEFT FOR MVP: endgame, payouts. 
 - have to implement endgame, payouts. 
 - i'm thinking of counting the top `N` finishers, where `N` equals 1/5 the number of people who signed up. So if 10 people sign up, then payouts take into account first and second place. This will be fairly easy--- if you bet against a person who finishes second, you only get 80% of the payout, etc. 
