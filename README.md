@@ -1,38 +1,30 @@
 # Chess Tournament and Betting with fake money
 
-view `notes.ipynb` to see boards in action. 
-they're just representing the games and the players currently. 
+## View `notes.ipynb` to see everything in action! 
 
-the book hasn't begun to be implemented, i have some notes about it in `entities.py`. 
+## MVP is not far away. 
 
 NOTES: 
 
-Double Round Robin: length 2 permutations of competitors represents the set of games. 
+- Double Round Robin: length 2 permutations of competitors represents the set of games. 
 
-- ~~competition will be `P(n,2)` games long, if we have n players competing.~~ 
-### this is implemented, but i need to check with Rudy to make sure i interpreted double-round-robin correctly
+- each bettor gets λ100, and the house will initialize at (null hypothesis) 1:1 odds on each player. I'll represent the house as a forecaster/bettor, just giving it more starter cash (like λ1000) and generating the null hyp bets
 
-~~scoring is this: ~~
-- ~~when a player wins, they are awarded 1 point~~
-- ~~when a player loses, they are awarded 0 points~~ 
-- ~~in a draw, they are awarded 0.5 points.~~
-### implemented, we can adjust the values in global vars in boards.py
+- Bettors can look at the current accumulated score for each player, and submit bets basically whenever. 
+ 
+### competitors will have to be 100% signed up in advance. We cannot admit new competitors once the tournament begins 
 
-## competitors will have to be 100% signed up in advance. I don't think we can admit new competitors once the tournament begins? 
+## Bettors can sign up on a rolling basis. they get initialized with λ100
+- I'm also at this point planning every `mark_winner` actually replenishes a dollar to every bettor, to help keep things interesting.  
 
-## We should be able to let bettors sign up on a rolling basis. they get initialized with λ100
+## ALL THAT'S LEFT FOR MVP: endgame, payouts. 
+- have to implement endgame, payouts. 
+- i'm thinking of counting the top `N` finishers, where `N` equals 1/5 the number of people who signed up. So if 10 people sign up, then payouts take into account first and second place. This will be fairly easy--- if you bet against a person who finishes second, you only get 80% of the payout, etc. 
 
+## sqlalchemy/sqlite refactor? 
+- This might be the correct move. probably not necessary for MVP. 
 
-
-Betters can look at the current accumulated score for each player, and submit bets basically whenever. 
-
-- QUESTION (Rudy?)--- do we have to _remember_ who exactly a player won/lost/drawed against, or can we just delete that information and only keep track of it in the form of the accumulated score. 
-
-what they're betting _on_ is the outcome at the very end--- the final score. 
-
-each bettor gets λ100, and the house will initialize at (null hypothesis) 1:1 odds on each player. I'll represent the house as a forecaster/bettor, just giving it more starter cash (like λ1000) and generating the null hyp bets
-
-- Should we have a mechanism for partial/depleted payouts if you bet on someone who got 2nd, 3rd, 5th place?? I don't know the details. I could do it as a basic discount factor but i think that might require unlimited house pot (rather than an arbitrary but fixed pot of like λ1000). 
-
-## Currently thinking actually that the Book class _wont_ inherit from the Boards class
-
+# Really cool stuff I'd like to do beyond MVP: 
+- Show bettors expected values, expected calibration plots and expected [Brier scores](https://en.wikipedia.org/wiki/Brier_score) 
+- Then of course the _actual_ versions of each, once endgame hits. 
+- Just write a lot more reports translating how the odds are interpreted 

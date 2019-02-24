@@ -1,26 +1,19 @@
 """entities"""
 import typing
+from fractions import Fraction as ratio
+from utils import Person
 
 
-class Competitor:
-    def __init__(self, name, username, program=None):
-        assert isinstance(name, str)
-        if username[0]=='@': 
-            self.username=username
-        else: 
-            self.username='@'+username
-        assert program in {'DS', 'iOS', 'FSW', 'Android', None}
-        self.name = name
-        self.program = program
+class Competitor(Person):
+    def __init__(self, name, username='', program='OTHER'):
+        super().__init__(name, username, program)
         self.score = 0
 
-    def show(self): 
-        return self.name
 
-class Forecaster:
-    def __init__(self, name, balance=100):
-        assert isinstance(name, str)
-        self.name = name
+class Forecaster(Person):
+    def __init__(self, name, username='', program='OTHER', balance=100):
+        super().__init__(name, username, program)
+        assert isinstance(balance, (int, float))
         self.balance = balance
         self.bets_offered = None
         self.bets_taken = None
@@ -28,37 +21,53 @@ class Forecaster:
     def show(self):
         return (self.name, self.balance)
 
+
 class Game:
     def __init__(self, ident, black, white, winner=None):
         assert isinstance(black, Competitor)
         assert isinstance(white, Competitor)
+        if winner is None:
+            winner = Competitor("NOBODY")
+        assert isinstance(winner, Competitor)
         self.ident = ident
         self.black = black
         self.white = white
         self.winner = winner
 
+
 class Bet:
-    '''NOTE: You have to split this into "bets posted" and "bets taken" '''
+    '''NOTE: '''
 
     def __init__(
             self,
             ident,
-            game,
-            offered_by,
+            posted_by,
             odds,
-            max_cash,
-            taken_by,
-            money_down=0,
-            expected_value=None):
+            on,
+            amount,
+            taken_by=None):
         assert isinstance(ident, int)
-        assert isinstance(game, Game)
-        assert isinstance(offered_by, Forecaster)
-        assert isinstance(max_cash, (int, float))
+        assert isinstance(odds, ratio)
+        assert isinstance(on, Competitor)
+        assert isinstance(posted_by, Forecaster)
+        assert isinstance(amount, (int, float))
+        assert amount <= posted_by.balance
+        if taken_by is None:
+            taken_by = Forecaster("NOBODY", balance=0)
         assert isinstance(taken_by, Forecaster)
         self.ident = ident
-        self.game = game
-        self.bettor = offered_by
-        self.bettee = taken_by
-        self.money_down = money_down
+        self.posted_by = posted_by
+        self.odds = odds
+        self.on = on
+        self.amount = amount
+        self.taken_by = taken_by
+        self.implicit_forecast = self.report_implicit_forecast()
 
-# NOTE
+    def report_implicit_forecast(self):
+        s0 = f'{self.posted_by.show()} would like to bet ${self.amount} on {self.on.show()} at {self.odds.numerator} to {self.odds.denominator} odds.\n'
+        if self.taken_by is None:
+            s1 = ''
+        else:
+            s1 = f'{self.taken_by.show()} has accepted these odds and posted this money. '
+
+        return s0 + s1
