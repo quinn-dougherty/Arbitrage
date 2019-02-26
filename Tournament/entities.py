@@ -36,21 +36,20 @@ class Game:
 
 
 class Bet:
-    '''NOTE: '''
+    '''TODO: update all the stuff for game_id param.
+
+    Factor out the emtpy forecaster and the empty competitor into somewhere else.
+    '''
 
     def __init__(
             self,
-            ident,
-            posted_by,
-            odds,
-            on,
-            amount,
+            ident: int,
+            game_id: int,
+            posted_by: Forecaster,
+            odds: ratio,
+            on: Competitor,
+            amount: float,
             taken_by=None):
-        assert isinstance(ident, int)
-        assert isinstance(odds, ratio)
-        assert isinstance(on, Competitor)
-        assert isinstance(posted_by, Forecaster)
-        assert isinstance(amount, (int, float))
         assert amount <= posted_by.balance
         if taken_by is None:
             taken_by = Forecaster("NOBODY", balance=0)

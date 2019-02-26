@@ -21,7 +21,7 @@ class Book(Boards):
         self.forecasters = {'HOUSE': Forecaster('HOUSE', balance=1000)}
         self.bets = self.init_H0()
         self.bettors_df = self.make_bettors_df(self.forecasters)
-        self.book_df = self.make_bets_df()
+        self.book_df = self.make_bets_df(self.bets)
 
     def make_forecaster(
             self,
@@ -56,7 +56,7 @@ class Book(Boards):
                 for identi, name in zip(identifiers, self.competitors.values())}
         return bets
 
-    def make_bets_df(self) -> Dat:
+    def make_bets_df(self, Bs: Dict[int, Bet]) -> Dat:
         ''' shows a df of the bets'''
         dat = {
             b.ident: [
@@ -64,7 +64,7 @@ class Book(Boards):
                 b.odds,
                 b.on,
                 b.amount,
-                b.taken_by] for b in self.bets.values()}
+                b.taken_by] for b in Bs.values()}
         book_df = pd.DataFrame.from_dict(
             dat, orient='index', columns=[
                 'posted_by', 'odds', 'on', 'amount', 'taken_by'])
@@ -90,12 +90,20 @@ class Book(Boards):
                             odds=odds,
                             on=self.competitors[on],
                             amount=amount))
-        self.book_df = self.make_bets_df()
+        self.book_df = self.make_bets_df(self.bets)
         pass
 
     def take_bet(self, by: str, ident: int):
         taken_by = self.forecasters[by]
         assert isinstance(taken_by, Forecaster)
         self.bets[ident].taken_by = taken_by
-        self.book_df = self.make_bets_df()
+        self.book_df = self.make_bets_df(self.bets)
         pass
+
+    def get_stake(self, forecaster: str) -> Dat:
+        '''given the name of a ofrecaster, return any bet they're involved in '''
+        stakeholder = self.forecasters[forecaster]
+        stake = {x.ident: x for x in self.bets.values()
+                 if x.posted_by.name == forecaster
+                 or x.taken_by.name == forecaster}
+        return self.make_bets_df(stake)

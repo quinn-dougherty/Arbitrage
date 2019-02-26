@@ -20,6 +20,7 @@ NOTES:
 - #TODO: factor out `sklearn.utils.shuffle`, whip it up with standard library instead. 
 
 ## ALL THAT'S LEFT FOR MVP: endgame, payouts. 
+- have to refactor Bet object because I forgot Game_ID attribute. big dummy, yeah. 
 - have to implement endgame, payouts. 
 - i'm thinking of counting the top `N` finishers, where `N` equals 1/5 the number of people who signed up. So if 10 people sign up, then payouts take into account first and second place. This will be fairly easy--- if you bet against a person who finishes second, you only get 80% of the payout, etc. 
 
