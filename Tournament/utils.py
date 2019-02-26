@@ -1,4 +1,7 @@
 from fractions import Fraction as ratio
+import pandas as pd
+
+Dat = pd.DataFrame
 
 
 class Person:

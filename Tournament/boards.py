@@ -1,10 +1,11 @@
 """module docstring"""
-import pandas as pd
 from itertools import permutations
 from typing import List, Dict
+from numpy.random import permutation as shuff_idx
+import pandas as pd
 
 from entities import Bet, Competitor, Forecaster, Game
-from utils import show
+from utils import show, Dat
 
 ## global vars
 lose_val, draw_val, win_val = (0, 0.5, 1)
@@ -25,7 +26,7 @@ class Boards:
         self.games_df = self.make_games_df()
         self.players_df = self.make_players_df()
 
-    def make_players_df(self):
+    def make_players_df(self) -> Dat:
         '''represent the table of players'''
         dat = {c.name: [c.score] for c in self.competitors.values()}
         players = pd.DataFrame.from_dict(
@@ -35,7 +36,6 @@ class Boards:
     def make_games_df(self):
         '''return list of games
         double round robin'''
-        from sklearn.utils import shuffle
 
         n = len(self.competitors)
         pairs = permutations(self.competitors.values(), 2)
@@ -43,9 +43,8 @@ class Boards:
                  for i, t in enumerate(pairs)]
 
         games_dict = {g.ident: [g.black, g.white, g.winner] for g in games}
-        games_df = shuffle(pd.DataFrame.from_dict(
-            games_dict, orient='index', columns=[
-                'black', 'white', 'winner']))
+        games_df = pd.DataFrame.from_dict(games_dict, orient='index', columns=[
+            'black', 'white', 'winner']).loc[shuff_idx(range(len(games)))]
 
         games_df.index = pd.RangeIndex(1, games_df.shape[0] + 1)
 
