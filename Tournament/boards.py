@@ -1,11 +1,12 @@
 """module docstring"""
 from itertools import permutations
-from typing import List, Dict
+from typing import List, Dict, Optional
 from numpy.random import permutation as shuff_idx
 import pandas as pd
+import altair as alt
 
 from entities import Bet, Competitor, Forecaster, Game
-from utils import show, Dat
+from utils import show, DF, Chart
 
 ## global vars
 lose_val, draw_val, win_val = (0, 0.5, 1)
@@ -26,7 +27,7 @@ class Boards:
         self.games_df = self.make_games_df()
         self.players_df = self.make_players_df()
 
-    def make_players_df(self) -> Dat:
+    def make_players_df(self) -> DF:
         '''represent the table of players'''
         dat = {c.name: [c.score] for c in self.competitors.values()}
         players = pd.DataFrame.from_dict(
@@ -75,3 +76,16 @@ class Boards:
             self.players_df.loc[self.games_df.iloc[ident]
                                 ['black'].show()] += draw_val
         pass
+
+    def show_scores(self, expect: Optional[str] = "NULL") -> Chart:
+        """ show current scores"""
+        C = alt.Chart(self.players_df.reset_index()).mark_bar().encode(
+            x='index:N',
+            y=alt.Y('score:Q', sort="ascending"),
+            color=alt.condition(
+                alt.datum.score > 3.5,
+                alt.value('orange'),
+                alt.value('steelblue')
+            )
+        )
+        return C

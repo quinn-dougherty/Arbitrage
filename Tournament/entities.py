@@ -1,11 +1,11 @@
 """entities"""
-import typing
+from typing import Union, Optional
 from fractions import Fraction as ratio
 from utils import Person
 
 
 class Competitor(Person):
-    def __init__(self, name, username='', program='OTHER'):
+    def __init__(self, name: str, username: str = '', program: str = 'OTHER'):
         super().__init__(name, username, program)
         self.score = 0
 
@@ -23,7 +23,12 @@ class Forecaster(Person):
 
 
 class Game:
-    def __init__(self, ident, black, white, winner=None):
+    def __init__(
+            self,
+            ident: int,
+            black: Competitor,
+            white: Competitor,
+            winner: Optional[Competitor] = None):
         assert isinstance(black, Competitor)
         assert isinstance(white, Competitor)
         if winner is None:
@@ -44,12 +49,11 @@ class Bet:
     def __init__(
             self,
             ident: int,
-            game_id: int,
             posted_by: Forecaster,
             odds: ratio,
             on: Competitor,
             amount: float,
-            taken_by=None):
+            taken_by: Optional[Forecaster] = None):
         assert amount <= posted_by.balance
         if taken_by is None:
             taken_by = Forecaster("NOBODY", balance=0)

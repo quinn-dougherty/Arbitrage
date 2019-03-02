@@ -1,11 +1,12 @@
-from fractions import Fraction as ratio
-import pandas as pd
+from typing import Union, Optional
+from fractions import Fraction as Ratio
 
-Dat = pd.DataFrame
+from pandas import DataFrame as DF
+from altair import Chart
 
 
 class Person:
-    def __init__(self, name, username='', program='OTHER'):
+    def __init__(self, name: str, username: str = '', program: str = 'OTHER'):
         assert isinstance(name, str) and name != '' and name is not None
         if username is not '':
             if username[0] == '@':
@@ -24,12 +25,12 @@ class Person:
         return self.name
 
 
-def show(s):
+def show(s: Optional[Union[str, int, float]]):
     if isinstance(s, Person):
         return s.show()
     elif isinstance(s, (str, int, float)):
         return s
-    elif isinstance(s, ratio):
+    elif isinstance(s, Ratio):
         return ':'.join([str(s.numerator), str(s.denominator)])
     else:
         return None
