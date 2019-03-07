@@ -5,8 +5,8 @@ from numpy.random import permutation as shuff_idx
 import pandas as pd
 import altair as alt
 
-from entities import Bet, Competitor, Forecaster, Game
-from utils import show, DF, Chart
+from .entities import Bet, Competitor, Forecaster, Game
+from .utils import show, DF, Chart
 
 ## global vars
 lose_val, draw_val, win_val = (0, 0.5, 1)

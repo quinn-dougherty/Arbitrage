@@ -5,9 +5,9 @@ from fractions import Fraction as Ratio
 import pandas as pd
 import altair as alt
 
-from boards import Boards
-from entities import Competitor, Forecaster, Game, Bet
-from utils import show, DF
+from .boards import Boards
+from .entities import Competitor, Forecaster, Game, Bet
+from .utils import show, DF
 
 idspace = 4
 

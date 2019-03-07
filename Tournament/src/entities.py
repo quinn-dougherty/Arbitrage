@@ -1,7 +1,7 @@
 """entities"""
 from typing import Union, Optional
 from fractions import Fraction as ratio
-from utils import Person
+from .utils import Person
 
 
 class Competitor(Person):

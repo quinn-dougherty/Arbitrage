@@ -2,7 +2,9 @@
 
 ## View `notes.ipynb` to see everything in action! 
 
-## MVP is not far away. 
+## ~MVP is not far away~.
+
+# Gonna serve it with flask and heroku for MVP
 
 NOTES: 
 

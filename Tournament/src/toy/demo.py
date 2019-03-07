@@ -45,7 +45,7 @@ def post_random_bets(t: Book):
     pass
 
 
-trn = make_book("players.csv")
+trn = make_book("../players.csv")
 
 mark_w_random_wins(9, trn)
 
