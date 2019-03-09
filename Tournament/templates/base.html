@@ -8,7 +8,16 @@
 
 	<body>
 		<h1> tell me the odds </h1>
-		<p> chess tournament betting with fake money </p>
+		{% block content %}
+			<form method='get'>
+			{% for player in players %}
+				<option value="{{ player.name }}"></option>
+			{% endfor %}
+			{% for game in games %}
+				<option value="{{ game.white }}"></option>
+			{% endfor %}
+			</form>
+		{% endblock %}
 	</body>
 
 </html>
