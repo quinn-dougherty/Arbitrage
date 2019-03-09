@@ -2,8 +2,8 @@ from numbers import Number
 from random import randint
 from typing import List, Dict, Union
 from fractions import Fraction as Ratio
-import pandas as pd
-import altair as alt
+import pandas as pd  # type: ignore
+import altair as alt  # type: ignore
 
 from .boards import Boards
 from .entities import Competitor, Forecaster, Game, Bet

@@ -1,6 +1,6 @@
-from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy  # type: ignore
 
-from demo import trn
+from demo import trn  # type: ignore
 
 DB = SQLAlchemy()
 

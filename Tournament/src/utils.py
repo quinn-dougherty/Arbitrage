@@ -1,8 +1,8 @@
 from typing import Union, Optional
 from fractions import Fraction as Ratio
 
-from pandas import DataFrame as DF
-from altair import Chart
+from pandas import DataFrame as DF  # type: ignore
+from altair import Chart  # type: ignore
 
 
 class Person:

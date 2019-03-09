@@ -1,9 +1,9 @@
 """module docstring"""
 from itertools import permutations
 from typing import List, Dict, Optional
-from numpy.random import permutation as shuff_idx
-import pandas as pd
-import altair as alt
+from numpy.random import permutation as shuff_idx  # type: ignore
+import pandas as pd  # type: ignore
+import altair as alt  # type: ignore
 
 from .entities import Bet, Competitor, Forecaster, Game
 from .utils import show, DF, Chart
