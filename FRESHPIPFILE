@@ -1,0 +1,3 @@
+#!/bin/bash
+
+pipenv install numpy pandas altair flask flask-sqlalchemy sqlalchemy psycopg2 gunicorn

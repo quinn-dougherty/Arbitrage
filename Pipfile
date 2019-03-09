@@ -4,16 +4,16 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-twine = "*"
 
 [packages]
 numpy = "*"
 pandas = "*"
 altair = "*"
-flask = "*" 
+flask = "*"
 flask-sqlalchemy = "*"
 sqlalchemy = "*"
 psycopg2 = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.6"

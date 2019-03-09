@@ -6,7 +6,7 @@ from typing import Dict
 from random import sample
 
 from ..book import Book
-PLAYERS = os.path.abspath('Tournament/src/toy/' + 'players.csv')
+PLAYERS = os.path.abspath('src/toy/' + 'players.csv')
 
 
 def make_book(filename) -> Book:
