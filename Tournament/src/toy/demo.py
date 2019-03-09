@@ -1,9 +1,10 @@
+from __future__ import absolute_import
 import csv
 from fractions import Fraction as ratio
 from typing import Dict
 from random import sample
 
-from book import Book
+from .book import Book
 
 
 def make_book(filename) -> Book:
@@ -44,8 +45,8 @@ def post_random_bets(t: Book):
     t.take_bet('angela', x[4])
     pass
 
-
-trn = make_book("../players.csv")
+abspath_playerscsv = "~/Projects/LambdaSchool/Misc/Tournament/Tournament/src/toy/players.csv"
+trn = make_book('players.csv')
 
 mark_w_random_wins(9, trn)
 
